@@ -1,0 +1,7 @@
+---
+- name: Test the MongoDB role for stand alone CentOS and Ubuntu systems
+  hosts: all
+  remote_user: root
+  roles:
+   - mongodb
+
