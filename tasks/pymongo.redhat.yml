@@ -1,0 +1,26 @@
+---
+- name: 'RedHat | Install EPEL Package'
+  yum:
+    name: epel-release
+    state: present
+  when: mongodb_pymongo_from_pip
+
+- name: 'RedHat | Install PyMongo package'
+  yum:
+    name: python-pymongo
+    state: latest
+  when: not mongodb_pymongo_from_pip
+
+- name: 'RedHat | Install PIP'
+  yum:
+    name: "{{ item }}"
+  with_items:
+    - python-devel
+    - python-pip
+  when: mongodb_pymongo_from_pip
+
+- name: 'RedHat | Install PyMongo from PIP'
+  pip:
+    name: pymongo
+    state: latest
+  when: mongodb_pymongo_from_pip

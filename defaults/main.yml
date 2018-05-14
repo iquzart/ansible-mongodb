@@ -1,0 +1,24 @@
+---
+
+mongodb_version: 3.6
+mongodb_apt_key: "2930ADAE8CAF5059EE73BB4B58712A2291FA4AD5"
+#  "3.4": "0C49F3730359A14518585931BC711F9BA15703C6"
+#  "3.6": "2930ADAE8CAF5059EE73BB4B58712A2291FA4AD5"
+mongodb_db_path: /mongodb
+mongodb_user: mongod
+mongodb_group: mongod
+mongodb_apt_keyserver: hkp://keyserver.ubuntu.com:80
+
+
+mongodb_pymongo_from_pip: true  
+mongodb_manage_hugepage_settings: True
+
+
+mongodb_admin_user: admin
+mongodb_admin_password: password
+app_db_name: MeraasDB
+app_db_user: appadmin
+app_db_password: password
+app_db_backup_user: appbackup
+app_db_backup_password: password
+

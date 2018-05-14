@@ -1,0 +1,41 @@
+---
+- name: Create MongoDB root user siteRootAdmin
+  mongodb_user:
+    login_port: "27017"
+    database: "admin"
+    name: "{{ mongodb_admin_user }}"
+    password: "{{ mongodb_admin_password }}"
+    roles: "root"
+
+- name: Create MongoDB administrative user siteUserAdmin
+  mongodb_user:
+    login_user: "{{ mongodb_admin_user }}"
+    login_password: "{{ mongodb_admin_password }}"
+    login_port: "27017"
+    database: "{{ app_db_name }}"
+    name: "{{ app_db_user }}"
+    password: "{{ app_db_password }}"
+    roles:
+      - { db: "admin", role: "readWrite" }
+      - { db: "{{ app_db_name }}", role: "readWrite" }
+
+- name: Create MongoDB backup user siteUserBackup
+  mongodb_user:
+    login_user: "{{ mongodb_admin_user }}"
+    login_password: "{{ mongodb_admin_password }}"
+    login_port: "27017"
+    database: "{{ app_db_name }}"
+    name: "{{ app_db_backup_user }}"
+    password: "{{ app_db_backup_password }}"
+    roles:
+      - { db: "admin", role: "backup" }
+
+- name: 'Common | Populate prost mongod config file'
+  template:
+    src: mongod.conf-post.j2
+    dest: /etc/mongod.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart mongod
+
