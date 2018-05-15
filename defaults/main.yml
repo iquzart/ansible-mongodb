@@ -16,7 +16,7 @@ mongodb_manage_hugepage_settings: True
 
 mongodb_admin_user: admin
 mongodb_admin_password: password
-app_db_name: MeraasDB
+app_db_name: AppDB
 app_db_user: appadmin
 app_db_password: password
 app_db_backup_user: appbackup
